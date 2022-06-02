@@ -17,8 +17,8 @@ axios.interceptors.request.use(
     // ？. 可选链操作符，如果前面对象里面没有length，整个表达式原地返回undefined
     if (getToken()?.length > 0 && config.headers.Authorization === undefined) {
       config.headers.Authorization = `Bearer ${getToken()}`
-      return config
     }
+    return config
   },
   function (error) {
     // 对请求错误做些什么
@@ -28,9 +28,7 @@ axios.interceptors.request.use(
 
 // 添加响应拦截器
 axios.interceptors.response.use(
-  function (response) {
-    // 2xx 范围内的状态码都会触发该函数。
-    // 对响应数据做点什么
+  response => {
     return response
   },
   function (error) {

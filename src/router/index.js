@@ -9,6 +9,8 @@ import User from '@/views/Users/User.vue'
 import Search from '@/views/Search/Search.vue'
 import SearchResult from '@/views/Search/SearchResult.vue'
 import ArticleDetail from '@/views/ArticleDetail/ArticleDetail.vue'
+import UserEditor from '@/views/Users/UserEdit.vue'
+import Chat from '@/views/Chat/Chat.vue'
 const routes = [
   {
     path: '/',
@@ -45,6 +47,16 @@ const routes = [
     // 文章详情页
     path: '/detail',
     component: ArticleDetail
+  },
+  {
+    // 用户资料编辑
+    path: '/user_editor',
+    component: UserEditor
+  },
+  // 小思同学聊天
+  {
+    path: '/chat',
+    component: Chat
   }
 ]
 
