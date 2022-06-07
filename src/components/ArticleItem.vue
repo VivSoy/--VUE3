@@ -9,11 +9,11 @@
           <span>{{ article.title }}</span>
           <!-- 单图 -->
           <!-- 利用v-if根据图片的数量来决定展示三图还是单图模式 -->
-          <img class="thumb" :src="article.cover.images[0]" v-if="article.cover.type === 1" />
+          <img class="thumb" :src="article.cover.images[0]" v-if="article.cover.type === 1" v-lazy="article.cover.images[0]" />
         </div>
         <!-- 三张图片 -->
         <div class="thumb-box" v-if="article.cover.type > 1">
-          <img class="thumb" v-for="(Url, index) in article.cover.images" :key="index" :src="Url" />
+          <img class="thumb" v-for="(Url, index) in article.cover.images" :key="index" :src="Url" v-lazy="Url" />
         </div>
       </template>
       <!-- label 区域的插槽 -->
@@ -42,6 +42,7 @@ import { timeAgo } from '@/untils/date.js'
 import { firstActions, secondActions } from '@/api/report.js'
 
 export default {
+  name: 'ArticleItems',
   props: {
     article: {
       type: Object
@@ -52,7 +53,7 @@ export default {
       default: true
     }
   },
-  emits: ['click'],
+  emits: ['click', 'dislike', 'report'],
   data() {
     return {
       formatTime: timeAgo(this.article.pubdate), // formatTime 就是函数

@@ -39,6 +39,7 @@ import ArticleList from '@/views/Home/ArticleList.vue'
 // 导入频道编辑组件
 import ChannelEdit from '@/views/Home/ChannelEdit.vue'
 export default {
+  name: 'MyHome',
   data() {
     return {
       imgObj: logoPng,
@@ -116,6 +117,9 @@ export default {
     this.channeList = res.data.data.channels
 
     // this.channelIdChanged()
+  },
+  activated() {
+    console.log(this.$route)
   }
   // methods: {
   //   // tab栏切换时触发

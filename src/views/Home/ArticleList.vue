@@ -16,6 +16,7 @@ import ArticleItem from '@/components/ArticleItem.vue'
 import { articleListAPI, dislikeArticle, reportArticle } from '@/api/index.js'
 import { Notify } from 'vant'
 export default {
+  name: 'AllArticle',
   props: {
     // list: {
     //   type: Array

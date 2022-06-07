@@ -56,6 +56,7 @@ import { GetCommentsAPI, likingComments, dislikeComments, sendComments } from '@
 // 导入时间处理组件
 import { timeAgo } from '@/untils/date.js'
 export default {
+  name: 'CommentsList',
   props: {},
   data() {
     return {
@@ -79,7 +80,6 @@ export default {
       art_id: this.$route.query.art_id,
       offset: this.offset
     })
-    console.log(res)
     this.commentsList = res.data.data.results
     this.comment = res.data.data.total_count || '' // 如果无评论不显示，防止出现0徽标
     this.offset = res.data.data.last_id

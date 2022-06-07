@@ -8,7 +8,7 @@
       <van-cell title="头像" is-link center>
         <!-- 使用 right-icon 插槽来自定义右侧图标 -->
         <template #default>
-          <van-image round class="avatar" :src="userProfile.photo" @click="imageClickFn" />
+          <van-image round class="avatar" :src="$store.state.userPhoto" @click="imageClickFn" />
           <!-- 上传文件 -->
           <input type="file" ref="iptFile" v-show="false" accept="image/*" @change="onFileChange" />
         </template>
@@ -33,7 +33,10 @@ import { getUserProfile, changePhoto, changeUserProfile } from '@/api/index.js'
 import { Notify } from 'vant'
 // 导入时间格式化函数
 import { formateDate } from '@/untils/date.js'
+// 导入vuex中的map
+import { mapMutations } from 'vuex'
 export default {
+  naem: 'MyUserEdit',
   data() {
     return {
       userProfile: {}, // 用户个人资料
@@ -47,21 +50,22 @@ export default {
   },
   async created() {
     const res = await getUserProfile()
-    console.log(res)
     this.userProfile = res.data.data
   },
   methods: {
+    ...mapMutations(['SET_USERPHOTO']),
     // 点击图片，触发隐藏的input，提交文件
     imageClickFn() {
       this.$refs.iptFile.click() // 利用$refs与input绑定起来，可以运用input的事件
     },
+    // 修改头像
     async onFileChange(e) {
       if (e.target.files.length === 0) return // 用户未选择图片
       const fd = new FormData() // 创建一个表单对象
       fd.append('photo', e.target.files[0])
       const res = await changePhoto(fd)
-      console.log(res)
       this.userProfile.photo = res.data.data.photo // 更换头像
+      this.SET_USERPHOTO(res.data.data.photo) // 更新成功后同步到vuex中
     },
     // 修改用户名
     changeName() {

@@ -33,13 +33,15 @@
 import { suggestionList } from '@/api/index.js'
 // 导入关键字高亮组件
 import { lightFn } from '@/untils/lightFn'
+import { getStorage, setStorage } from '@/untils/storage.js'
 export default {
+  name: 'MySearch',
   data() {
     return {
       value: '',
       timer: null, // 防抖的定时器
       suggestList: [], // 搜索联想的数据
-      history: JSON.parse(localStorage.getItem('his')) || [] // 搜索历史
+      history: JSON.parse(getStorage('his')) || [] // 搜索历史
     }
   },
   methods: {
@@ -102,7 +104,7 @@ export default {
         // 立即覆盖式保存到本地
         const theSet = new Set(this.history)
         const arr = Array.from(theSet) // Array.form 将伪数组或对象转化为数组
-        localStorage.setItem('his', JSON.stringify(arr))
+        setStorage('his', JSON.stringify(arr))
       }
     }
   }

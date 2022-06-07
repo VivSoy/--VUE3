@@ -19,6 +19,7 @@ import ArticleItem from '@/components/ArticleItem.vue'
 // 导入获取搜索结果的api
 import { searchResult } from '@/api/index.js'
 export default {
+  name: 'MySearchResult',
   components: {
     ArticleItem
   },

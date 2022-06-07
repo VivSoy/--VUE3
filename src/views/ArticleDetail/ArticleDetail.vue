@@ -51,6 +51,7 @@ import { timeAgo } from '@/untils/date.js'
 /* 导入底部评论区域 */
 import CommentList from '@/views/ArticleDetail/CommentList.vue'
 export default {
+  name: 'ArticleDetails',
   data() {
     return {
       content: {} // 获取到的文章所有详情

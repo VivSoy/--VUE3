@@ -49,6 +49,7 @@
 // 导入所有频道的API
 import { allChannelListAPI } from '@/api/index.js'
 export default {
+  name: 'ChannelMan',
   props: {
     myChannel: {
       type: Array

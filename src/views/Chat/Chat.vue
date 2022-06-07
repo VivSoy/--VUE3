@@ -37,7 +37,7 @@ import { io } from 'socket.io-client'
 // 获取token
 import { getToken } from '@/untils/token.js'
 export default {
-  name: 'Chat',
+  name: 'Talk',
   data() {
     return {
       word: '', // 输入框的内容

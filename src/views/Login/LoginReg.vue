@@ -19,7 +19,9 @@ import { LoginAPI } from '@/api/index.js'
 import { Notify } from 'vant'
 // 导入token操作模块
 import { setToken } from '@/untils/token.js'
+import { setStorage } from '@/untils/storage.js'
 export default {
+  naem: 'MyLoginReg',
   data() {
     return {
       formLogin: {
@@ -37,9 +39,9 @@ export default {
       this.isLoading = true
       try {
         const res = await LoginAPI(this.formLogin)
-        console.log(res)
         Notify({ type: 'success', message: '登录成功' })
         setToken(res.data.data.token)
+        setStorage('refresh_token', res.data.data.refresh_token)
         this.$router.replace('/layout') // 登录成功后跳转到布局页面
       } catch (err) {
         console.error(err)
