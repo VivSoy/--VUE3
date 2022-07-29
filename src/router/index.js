@@ -34,20 +34,23 @@ const routes = [
     redirect: '/layout/home',
     component: () => import('@/views/Layout/Layout.vue'),
     name: 'layout',
-    meta: {
-      scrollT: 0, // 保存首页离开时滚动条的位置
-      keepAlive: true
-    },
     children: [
       {
         path: 'home',
         component: () => import('@/views/Home/Home.vue'),
-        name: 'home'
+        name: 'home',
+        meta: {
+          scrollT: 0, // 保存首页离开时滚动条的位置
+          keepAlive: true
+        }
       },
       {
         path: 'user',
         component: () => import('@/views/Users/User.vue'),
-        name: 'user'
+        name: 'user',
+        meta: {
+          keepAlive: true
+        }
       }
     ]
   },

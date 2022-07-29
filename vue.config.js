@@ -12,5 +12,6 @@ module.exports = defineConfig({
     headers: {
       'Access-Control-Allow-Origin': '*'
     }
-  }
+  },
+  publicPath: './' // 告诉webpack打包的index.html引入其他资源文件以./开头，不要默认/开头
 })

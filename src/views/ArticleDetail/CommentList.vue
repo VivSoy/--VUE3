@@ -43,7 +43,7 @@
 
       <!-- 底部添加评论区域 - 2 -->
       <div class="cmt-box van-hairline--top" v-else>
-        <textarea placeholder="友善评论、理性发言、阳光心灵" v-fofo @blur="blurFn" v-model="commentValue"></textarea>
+        <textarea placeholder="友善评论、理性发言、阳光心灵" ref="autoFocus" @blur="blurFn" v-model="commentValue"></textarea>
         <van-button type="default" :disabled="this.commentValue.length === 0" @click="send(this.$route.query.art_id, commentValue)">发布</van-button>
       </div>
     </div>
@@ -55,6 +55,7 @@
 import { GetCommentsAPI, likingComments, dislikeComments, sendComments } from '@/api/index.js'
 // 导入时间处理组件
 import { timeAgo } from '@/untils/date.js'
+import { ref, onMounted } from 'vue'
 export default {
   name: 'CommentsList',
   props: {},
@@ -72,6 +73,15 @@ export default {
       finished: false,
       // 当页评论的最后一个id，作为请求下一页的偏移量
       offset: null
+    }
+  },
+  setup() {
+    const autoFocus = ref(null)
+    onMounted(() => {
+      autoFocus.value && autoFocus.value.focus()
+    })
+    return {
+      autoFocus
     }
   },
   async created() {

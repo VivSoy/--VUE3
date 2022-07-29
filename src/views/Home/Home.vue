@@ -12,7 +12,7 @@
         </template>
       </van-nav-bar>
       <!-- tab导航 -->
-      <van-tabs v-model:active="channelId" animated sticky offset-top="1.226667rem">
+      <van-tabs v-model:active="channelId" animated sticky offset-top="1.226667rem" swipeable>
         <van-tab v-for="item in channeList" :key="item.id" :title="item.name" :name="item.id"
           ><!-- name属性绑定频道id -->
           <!-- 文章列表 -->
@@ -45,7 +45,8 @@ export default {
       imgObj: logoPng,
       channelId: 0, // tab栏默认展示标签索引的内容 默认频道ID为0
       channeList: [],
-      show: false // 添加频道图层默认不展示
+      show: false, // 添加频道图层默认不展示
+      scroll: '' // 组件导航守卫保存的滚动条高度
     }
   },
   components: {
@@ -97,6 +98,10 @@ export default {
     // 进入选定的频道
     enterChannelFn(item) {
       this.channelId = item.id
+    },
+    // 监听网页滚动事件
+    scrollFn() {
+      this.$route.meta.scrollT = document.documentElement.scrollTop
     }
   },
   setup() {
@@ -118,8 +123,23 @@ export default {
 
     // this.channelIdChanged()
   },
+  // 激活时，保存当前组件的滚动条位置
   activated() {
-    console.log(this.$route)
+    window.addEventListener('scroll', this.scrollFn)
+    // document.documentElement.scrollTop = this.$route.meta.scrollT
+    // document.body.scrollTop = this.$route.meta.scrollT
+  },
+  deactivated() {
+    // this.$route.meta.scrollT = document.documentElement.scrollTop
+    // console.log(this.scroll)
+    // console.log(this.$route.meta)
+    // 移除监听事件
+    window.removeEventListener('scroll', this.scrollFn)
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$route.meta.scrollT = document.documentElement.scrollTop
+    console.log(this.$route.meta.scrollT)
+    next()
   }
   // methods: {
   //   // tab栏切换时触发
