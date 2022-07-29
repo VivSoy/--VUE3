@@ -105,7 +105,7 @@ export default {
     }
   },
   setup() {
-    // 全局配置样式
+    // 全局配置了样式
     const themeVars = {
       /* 自定义navbar的背景颜色 */
       navBarBackgroundColor: '#007bff',
